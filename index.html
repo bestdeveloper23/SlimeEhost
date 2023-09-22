@@ -30,8 +30,8 @@
         <div class="m-auto w-full">
             <div class="flex justify-center alan-box relative">
                 <div id="left-face-container" class="cursor-pointer " onmouseover="leftFaceMouseOver()" onmouseout="leftFaceMouseOut()" onclick="onClickLeft()">
-                    <img src="./assets/LeftFront.png" alt="Face Left" id="face-left-front-image" class="primary-section inline relative hover-effect-inverse" style="z-index: 3;">
-                    <img src="./assets/LeftBack.png" alt="Face Left" id="face-left-back-image" class="primary-section inline relative hover-effect-inverse" style="margin-left: -22px; z-index: 1;">
+                    <img src="./assets/LeftFront.png" alt="Face Left" id="face-left-front-image" class="primary-section inline relative" style="z-index: 3;">
+                    <img src="./assets/LeftBack.png" alt="Face Left" id="face-left-back-image" class="primary-section inline relative" style="margin-left: -22px; z-index: 1;">
                 </div>
 
                 <div id="face-merge-image" class="absolute z-50" style="transform: translateX(-2vh);">
@@ -42,8 +42,8 @@
                 </div>
 
                 <div id="right-face-container" class="cursor-pointer " onmouseover="rightFaceMouseOver()" onmouseout="rightFaceMouseOut()" onclick="onClickRight()">
-                    <img src="./assets/RightBack.png" alt="Face Right" id="face-right-back-image" class="primary-section inline relative hover-effect-inverse" style="margin-right: -28px; z-index: 1;">
-                    <img src="./assets/RightFront.png" alt="Face Right" id="face-right-front-image" class="primary-section inline relative hover-effect-inverse" style="z-index: 3;">
+                    <img src="./assets/RightBack.png" alt="Face Right" id="face-right-back-image" class="primary-section inline relative" style="margin-right: -28px; z-index: 1;">
+                    <img src="./assets/RightFront.png" alt="Face Right" id="face-right-front-image" class="primary-section inline relative" style="z-index: 3;">
                 </div>
             </div>
         </div>
@@ -62,6 +62,18 @@
         display: flex;
     }
 
+    .primary-section {
+        max-height: 450px;
+    }
+
+    #left-face-container {
+        margin-right: -135px;
+    }
+
+    #right-face-container {
+        margin-left: -140px;
+    }
+
     #shop-image,
     #patreon-image {
         top: inherit;
@@ -70,7 +82,7 @@
     
     .diagonal-image {
         position: absolute;
-        height: 250px; /* Set your image height */
+        height: 200px; /* Set your image height */
         transition: transform 2s ease-in-out; /* Animation duration and easing */
     }
 
@@ -169,18 +181,6 @@
     }, 1500)
 </script>
 <style>
-    #left-face-container {
-        margin-right: -140px;
-    }
-
-    #right-face-container {
-        margin-left: -140px;
-    }
-
-
-
-
-
     .alan-box {
         animation: shrink 1s;
         animation-timing-function: ease-in-out;
@@ -275,8 +275,6 @@
     }
 
     #goo-image.goo-split-permanent {
-        /* transform: scaleX(1.6); */
-        /* animation-delay: 1s; */
         animation-duration: 0.7s;
         animation-fill-mode: forwards;
         animation-timing-function: ease-out;
@@ -289,14 +287,6 @@
 </style>
 
 <style>
-    .primary-section {
-        max-height: 450px;
-    }
-
-
-
-
-
     .alan-box {
         animation: verticalOscillate 1.5s ease-in-out infinite, splitready 1.3s alternate;
     }
@@ -361,7 +351,7 @@
         }
 
         100% {
-            transform: perspective(5em) rotateY(7deg) skew(0deg, -1deg) scaleX(0.83);
+            transform: perspective(5em) rotateY(7deg) skew(0deg, -2deg) scaleX(0.83);
         }
 
     }
@@ -535,6 +525,7 @@
         }, 100);
         setTimeout(() => {
             initialAnimating = false; 
+            gooImage.classList.remove('goo-split-permanent');
         }, 1000);
 
     }, 700);
@@ -545,11 +536,10 @@
 
     async function leftFaceMouseOver(){
         if(initialAnimating) {
-            await sleep(500);
-            await leftFaceMouseOver();
+            // await sleep(500);
             return;
         };
-
+        initialAnimating = true;
         leftFaceMouseIn = true;
         gooImage.classList.remove('hover-effect-right-inverse');
         gooImage.classList.remove('hover-effect-left-inverse')
@@ -562,8 +552,9 @@
         setTimeout(() => {
             removeClassByRegex(gooImage, 'hover-effect');
             gooImage.classList.remove('hover-effect-left-ready');
+            if(initialAnimating)
             gooImage.classList.add('hover-effect-left');
-    
+            initialAnimating = false;
         }, 200);
         
         extendFlags('left');
@@ -577,6 +568,8 @@
     }
 
     function leftFaceMouseOut() {
+        initialAnimating = false;
+        gooImage.classList.remove('hover-effect-left');
         leftFaceFrontImage.classList.remove('hover-effect');
         leftFaceBackImage.classList.remove('hover-effect');
         removeClassByRegex(gooImage, 'hover-effect')
@@ -591,11 +584,12 @@
 
     async function rightFaceMouseOver(){
         if(initialAnimating) {
-            await sleep(500);
-            await rightFaceMouseOver();
+            // await sleep(500);
+            // await rightFaceMouseOver();
             return;
         };
 
+        initialAnimating = true;
         rightFaceMouseIn = true;  
         gooImage.classList.remove('hover-effect-right-inverse');
         gooImage.classList.remove('hover-effect-left-inverse')
@@ -608,8 +602,9 @@
         setTimeout(() => {
             removeClassByRegex(gooImage, 'hover-effect');
             gooImage.classList.remove('hover-effect-right-ready');
+            if(initialAnimating)
             gooImage.classList.add('hover-effect-right');
-  
+            initialAnimating = false;
         }, 200);
         
         extendFlags('right');
@@ -623,6 +618,8 @@
     }
 
     function rightFaceMouseOut() {
+        initialAnimating = false;
+        gooImage.classList.remove('hover-effect-right');
         rightFaceFrontImage.classList.remove('hover-effect');
         rightFaceBackImage.classList.remove('hover-effect');
         removeClassByRegex(gooImage, 'hover-effect')
