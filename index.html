@@ -20,8 +20,8 @@
     <div class="inline-flex justify-center content-center h-[100vh] text-center w-full absolute" style="z-index: 0">
         <div class="m-auto w-full">
             <div class="inline-flex flag-container">
-                <img src="./assets/shop.png" alt="Face Left" id="shop-image" class="diagonal-image" style="max-height: 350px; z-index: 1; opacity: 1;">
-                <img src="./assets/patreon.png" alt="Face Left" id="patreon-image" class="diagonal-image" style="max-height: 350px; z-index: 2; opacity: 1;">
+                <img src="./assets/shop.png" alt="Face Left" id="shop-image" class="diagonal-image">
+                <img src="./assets/patreon.png" alt="Face Left" id="patreon-image" class="diagonal-image">
             </div>
         </div>
     </div>
@@ -31,10 +31,10 @@
             <div class="flex justify-center alan-box relative">
                 <div id="left-face-container" class="cursor-pointer " onmouseover="leftFaceMouseOver()" onmouseout="leftFaceMouseOut()" onclick="onClickLeft()">
                     <img src="./assets/LeftFront.png" alt="Face Left" id="face-left-front-image" class="primary-section inline relative" style="z-index: 3;">
-                    <img src="./assets/LeftBack.png" alt="Face Left" id="face-left-back-image" class="primary-section inline relative" style="margin-left: -22px; z-index: 1;">
+                    <img src="./assets/LeftBack.png" alt="Face Left" id="face-left-back-image" class="primary-section inline relative">
                 </div>
 
-                <div id="face-merge-image" class="absolute z-50" style="transform: translateX(-2vh);">
+                <div id="face-merge-image" class="absolute z-50">
                     <img src="./assets/Goo_merged.png" alt="mergedImage" class="primary-section">
                 </div>
                 <div id="goo-container">
@@ -42,7 +42,7 @@
                 </div>
 
                 <div id="right-face-container" class="cursor-pointer " onmouseover="rightFaceMouseOver()" onmouseout="rightFaceMouseOut()" onclick="onClickRight()">
-                    <img src="./assets/RightBack.png" alt="Face Right" id="face-right-back-image" class="primary-section inline relative" style="margin-right: -28px; z-index: 1;">
+                    <img src="./assets/RightBack.png" alt="Face Right" id="face-right-back-image" class="primary-section inline relative">
                     <img src="./assets/RightFront.png" alt="Face Right" id="face-right-front-image" class="primary-section inline relative" style="z-index: 3;">
                 </div>
             </div>
@@ -66,6 +66,16 @@
         max-height: 450px;
     }
 
+    #face-left-back-image{
+        margin-left: -22px; 
+        z-index: 1;
+    }
+
+    #face-right-back-image{
+        margin-right: -28px; 
+        z-index: 1;
+    }
+
     #left-face-container {
         margin-right: -135px;
     }
@@ -78,42 +88,231 @@
     #patreon-image {
         top: inherit;
         left: inherit;
+        max-height: 350px; 
+        z-index: 1; 
+        opacity: 1;
     }
     
+    #right-face-container.ready-for-hover{
+        margin-left: -60px;
+        transition: 0.8s;
+    }
+
+    #left-face-container.ready-for-hover {
+        margin-right: -60px;
+        transition: 0.8s;
+    }
+
+    #face-merge-image{
+        transform: translateX(-2vh);
+    }
+
     .diagonal-image {
         position: absolute;
         height: 200px; /* Set your image height */
         transition: transform 2s ease-in-out; /* Animation duration and easing */
     }
+    
+    
+    @keyframes diagonalAnimationLeftExtend {
+        0% {
+            transform: translateX(-160%) translateY(-100%) scale(1);
+        }
 
-    #shop-image.animation{
-        animation: diagonalAnimationLeft 0.5s ease-out forwards;
-        /* animation-delay: 0.2s; */
+        100% {
+            transform: translateX(-190%) translateY(-120%) scale(1.3);
+        }
     }
 
-    #patreon-image.animation{
-        animation: diagonalAnimationRight 0.5s ease-out forwards;
-        /* animation-delay: 0.2s; */
+    @keyframes diagonalAnimationRightExtend {
+        0% {
+            transform: translateX(130%) translateY(-100%) scale(1);
+        }
+        100% {
+            transform: translateX(150%) translateY(-120%) scale(1.3);
+        }
+    }
+
+    @keyframes diagonalAnimationLeftUnextend {
+        0% {
+            transform: translateX(-190%) translateY(-120%) scale(1.3);
+        }
+
+        100% {
+            transform: translateX(-160%) translateY(-100%) scale(1);
+        }
+    }
+
+    @keyframes diagonalAnimationRightUnextend {
+        0% {
+            transform: translateX(150%) translateY(-120%) scale(1.3);
+        }
+        100% {
+            transform: translateX(130%) translateY(-100%) scale(1);
+        }
     }
 
     @keyframes diagonalAnimationLeft {
         0% {
+            opacity: 0;
             transform: translateX(0) translateY(0);
         }
+        
+        40%{
+            opacity: 0;
+        }
         100% {
-            transform: translateX(-130%) translateY(-100%);
+            opacity: 1;
+            transform: translateX(-160%) translateY(-100%);
         }
     }
 
     @keyframes diagonalAnimationRight {
         0% {
+            opacity: 0;
             transform: translateX(0) translateY(0);
         }
+        40%{
+            opacity: 0;
+        }
         100% {
-            transform: translateX(100%) translateY(-100%);
+            opacity: 1;
+            transform: translateX(130%) translateY(-100%);
         }
     }
 
+
+    @media (max-width: 768px) {
+        .primary-section {
+            max-height: 260px;
+        }
+        
+        #face-left-back-image{
+            margin-left: -12px; 
+            z-index: 1;
+        }
+
+        #face-right-back-image{
+            margin-right: -16px; 
+            z-index: 1;
+        }
+
+        #left-face-container {
+            margin-right: -78px;
+        }
+
+        #right-face-container {
+            margin-left: -80px;
+        }
+
+        #right-face-container.ready-for-hover{
+            margin-left: -32px;
+            transition: 0.8s;
+        }
+
+        #left-face-container.ready-for-hover {
+            margin-right: -32px;
+            transition: 0.8s;
+        }
+        
+        #shop-image,
+        #patreon-image {
+            top: inherit;
+            left: inherit;
+            max-height: 200px; 
+            z-index: 1; 
+            opacity: 1;
+        }
+        
+        .diagonal-image {
+            position: absolute;
+            height: 150px; /* Set your image height */
+            transition: transform 2s ease-in-out; /* Animation duration and easing */
+        }
+
+        #face-merge-image{
+            transform: translateX(-9px);
+        }  
+        
+        @keyframes diagonalAnimationLeftExtend {
+            0% {
+                transform: translateX(-130%) translateY(-80%) scale(1);
+            }
+
+            100% {
+                transform: translateX(-150%) translateY(-100%) scale(1.3);
+            }
+        }
+
+        @keyframes diagonalAnimationRightExtend {
+            0% {
+                transform: translateX(100%) translateY(-80%) scale(1);
+            }
+            100% {
+                transform: translateX(125%) translateY(-100%) scale(1.3);
+            }
+        }
+
+        @keyframes diagonalAnimationLeftUnextend {
+            0% {
+                transform: translateX(-150%) translateY(-100%) scale(1.3);
+            }
+
+            100% {
+                transform: translateX(-130%) translateY(-80%) scale(1);
+            }
+        }
+
+        @keyframes diagonalAnimationRightUnextend {
+            0% {
+                transform: translateX(125%) translateY(-100%) scale(1.3);
+            }
+            100% {
+                transform: translateX(100%) translateY(-80%) scale(1);
+            }
+        }
+
+        @keyframes diagonalAnimationLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(0) translateY(0);
+            }
+            
+            40%{
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-130%) translateY(-80%);
+            }
+        }
+
+        @keyframes diagonalAnimationRight {
+            0% {
+                opacity: 0;
+                transform: translateX(0) translateY(0);
+            }
+            40%{
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(100%) translateY(-80%);
+            }
+        }
+
+
+    }
+
+    #shop-image.animation{
+        animation: diagonalAnimationLeft 0.8s ease-out forwards;
+        /* animation-delay: 0.2s; */
+    }
+
+    #patreon-image.animation{
+        animation: diagonalAnimationRight 0.8s ease-out forwards;
+        /* animation-delay: 0.2s; */
+    }
 
     #shop-image.extend-back {
         animation: diagonalAnimationLeftExtend .2s ease-in-out forwards !important;
@@ -131,44 +330,6 @@
         animation: diagonalAnimationRightUnextend .2s ease-in-out forwards !important;
     }
 
-    @keyframes diagonalAnimationLeftExtend {
-        0% {
-            transform: translateX(-130%) translateY(-100%) scale(1);
-        }
-
-        100% {
-            transform: translateX(-150%) translateY(-120%) scale(1.3);
-        }
-    }
-
-    @keyframes diagonalAnimationRightExtend {
-        0% {
-            transform: translateX(100%) translateY(-100%) scale(1);
-        }
-        100% {
-            transform: translateX(120%) translateY(-120%) scale(1.3);
-        }
-    }
-
-    @keyframes diagonalAnimationLeftUnextend {
-        0% {
-            transform: translateX(-150%) translateY(-120%) scale(1.3);
-        }
-
-        100% {
-            transform: translateX(-130%) translateY(-100%) scale(1);
-        }
-    }
-
-    @keyframes diagonalAnimationRightUnextend {
-        0% {
-            transform: translateX(120%) translateY(-120%) scale(1.3);
-        }
-        100% {
-            transform: translateX(100%) translateY(-100%) scale(1);
-        }
-    }
-
 </style>
 <script>
     document.getElementById('shop-image').style.opacity = 0;
@@ -178,7 +339,7 @@
         document.getElementById('patreon-image').style.opacity = 1;
         document.getElementById('shop-image').classList.add('animation');
         document.getElementById('patreon-image').classList.add('animation');
-    }, 1500)
+    }, 1200)
 </script>
 <style>
     .alan-box {
@@ -211,16 +372,6 @@
 
     #face-right-front-image.split, #face-right-back-image.split {
         animation-name: splitRight;
-    }
-
-    #right-face-container.ready-for-hover{
-        margin-left: -60px;
-        transition: 0.8s;
-    }
-
-    #left-face-container.ready-for-hover {
-        margin-right: -60px;
-        transition: 0.8s;
     }
 
     @keyframes splitready {
@@ -270,7 +421,7 @@
             transform: scaleX(0);
         }
         100% {
-            transform: scaleX(1.3);
+            transform: scaleX(1);
         }
     }
 
@@ -306,7 +457,7 @@
 
     #face-left-front-image.hover-effect, #face-left-back-image.hover-effect {
         transform-origin: right center !important;
-        animation: faceEnlarge 0.2s ease-in-out forwards, verticalVibrate 0.2s 0.2s ease-in-out infinite;
+        animation: faceEnlarge 0.2s ease-in-out forwards, verticalVibrate 0.13s 0.2s ease-in-out infinite;
     }
 
     #face-left-front-image.hover-effect-inverse, #face-left-back-image.hover-effect-inverse {
@@ -316,7 +467,7 @@
 
     #face-right-front-image.hover-effect, #face-right-back-image.hover-effect {
         transform-origin: left center !important;
-        animation: faceEnlarge 0.2s ease-in-out forwards, verticalVibrate 0.2s 0.2s ease-in-out infinite;
+        animation: faceEnlarge 0.2s ease-in-out forwards, verticalVibrate 0.13s 0.2s ease-in-out infinite;
     }
 
     #face-right-front-image.hover-effect-inverse, #face-right-back-image.hover-effect-inverse {
@@ -325,7 +476,7 @@
     }
 
     #goo-image.hover-effect-left {
-        animation: gooStretchDiagonalLeft .2s ease-in-out infinite;
+        animation: gooStretchDiagonalLeft .13s ease-in-out infinite;
     }
 
     #goo-image.hover-effect-left-ready {
@@ -377,7 +528,7 @@
 
 
     #goo-image.hover-effect-right {
-        animation: gooStretchDiagonalRight .2s ease-in-out infinite;
+        animation: gooStretchDiagonalRight .13s ease-in-out infinite;
     }
 
     #goo-image.hover-effect-right-ready {
@@ -648,13 +799,15 @@
     async function onClickLeft() {
         leftFaceMouseOver();
         await sleep(200);
-        window.location.href = 'https://www.bigcartel.com/';
+        // window.location.href = 'https://www.bigcartel.com/';
+        window.location.href = 'https://truewagner.bigcartel.com/'
     }
 
     async function onClickRight() {
         rightFaceMouseOver();
         await sleep(200);
-        window.location.href = 'https://patreon.truewagner.com';
+        // window.location.href = 'https://patreon.truewagner.com';
+        window.location.href = 'https://patreon.com/truewagner';
     }
 
 </script>
